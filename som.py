@@ -20,8 +20,10 @@ class SOM(nn.Module):
             self.sigma = max(out_size) / 2
         else:
             self.sigma = float(sigma)
-
+        
+        #rnd weights
         self.weight = nn.Parameter(torch.randn(input_size, out_size[0] * out_size[1]), requires_grad=False)
+        #get locationS
         self.locations = nn.Parameter(torch.Tensor(list(self.get_map_index())), requires_grad=False)
         self.pdist_fn = nn.PairwiseDistance(p=2)
 

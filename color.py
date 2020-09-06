@@ -20,19 +20,24 @@ for i in range(10):
     colors = np.append(colors, np.array([[1, random.random(), random.random()]]), axis=0)
     colors = np.append(colors, np.array([[random.random(), random.random(), 1]]), axis=0)
     colors = np.append(colors, np.array([[random.random(), random.random(), random.random()]]), axis=0)
+#array to tensor
 data = torch.Tensor(colors)
 
+#hyper parameters
 row = 40
 col = 40
 total_epoch = 1000
 
+#som
 som = SOM(3, (row, col))
 for iter_no in range(total_epoch):
     som.self_organizing(data, iter_no, total_epoch)
 
+#get weights (map)
 weight = som.weight.reshape(3, row, col).numpy()
 weight = np.transpose(weight, (1, 2, 0,))
 
+#plot
 plt.title('Color SOM')
 plt.imshow(weight)
 plt.show()
